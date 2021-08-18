@@ -4,16 +4,14 @@ package com.bridgelabz;
  * Purpose - Employee Wage Computation program for multiple companies
  *
  * @author - Aviral N
- * @version - 1.7
+ * @version - 1.8
  * date     - 18-08-2021
  */
 public class EmpWage {
 
-    public static final int IS_PRESENT = 1, IS_PART_TIME_PRESENT = 2;
-    public static final int FULL_TIME_WORKING_HR = 8, PART_TIME_WORKING_HR = 4,
-            WAGE_PER_HRS = 20, WORKING_DAY_FOR_MONTH = 20, TOTAL_WORKING_HRS = 100;
+    public static final int IS_PRESENT = 1, IS_PART_TIME_PRESENT = 2,
+            FULL_TIME_WORKING_HR = 8, PART_TIME_WORKING_HR = 4;
     public static int monthlyWage = 0, workingHrsPerMonth = 0, workingHrPerDay;
-
 
     /**
      * Purpose - checks whether an EMP is full time present, part-time present or absent
@@ -42,12 +40,13 @@ public class EmpWage {
     /**
      * Purpose - Calculates daily wage if emp is  present
      *
+     * @param wagePerHrs      varies company by company
      * @param workingHrPerDay working hrs of an EMP in a day (8, 4, 0)
-     * @return dailyWage (160, 80, 0)
+     * @return dailyWage
      */
-    public int dailyWage(int workingHrPerDay) {
+    public int dailyWage(int wagePerHrs, int workingHrPerDay) {
 
-        int dailyWage = WAGE_PER_HRS * workingHrPerDay;
+        int dailyWage = wagePerHrs * workingHrPerDay;
         System.out.println("Daily wage: " + dailyWage);
 
         return dailyWage;
@@ -83,22 +82,22 @@ public class EmpWage {
     }
 
     /**
-     * Purpose - Calculate wage for a month
+     * Purpose - Calculate wage for a month for multiple companies
      *
      * @return monthly wage
      */
-    public int monthlyWage() {
+    public int monthlyWage(int wagePerHrs, int workingDayForMonth, int totalWorkingHrs) {
 
         EmpWage monthlyWageCalculator = new EmpWage();
 
-        for (int i = 1; i <= WORKING_DAY_FOR_MONTH; i++) {
+        for (int i = 1; i <= workingDayForMonth; i++) {
             System.out.println("Day-" + i);
 
-            if (workingHrsPerMonth >= TOTAL_WORKING_HRS)
+            if (workingHrsPerMonth >= totalWorkingHrs)
                 break;
 
             int workingHrsPerDay = monthlyWageCalculator.attendanceCheck();
-            int dailyWage = monthlyWageCalculator.dailyWage(workingHrsPerDay);
+            int dailyWage = monthlyWageCalculator.dailyWage(wagePerHrs, workingHrsPerDay);
 
             monthlyWage += dailyWage;
             workingHrsPerMonth += workingHrsPerDay;
@@ -116,7 +115,10 @@ public class EmpWage {
 
         EmpWage empWageCalculator = new EmpWage();
 
-        int monthlyWage = empWageCalculator.monthlyWage();
-        System.out.println("Monthly wage of EMP : " + monthlyWage);
+        int monthlyWageBridge = empWageCalculator.monthlyWage(20, 20, 100);
+        System.out.println("Monthly wage of EMP in bridgelabz : " + monthlyWageBridge);
+
+        int monthlyWageDmart = empWageCalculator.monthlyWage(24, 28, 145);
+        System.out.println("Monthly wage of EMP in D-Mart : " + monthlyWageDmart);
     }
 }
