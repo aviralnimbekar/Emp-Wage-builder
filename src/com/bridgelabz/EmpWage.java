@@ -4,13 +4,14 @@ package com.bridgelabz;
  * Purpose - Employee Wage Computation program for multiple companies
  *
  * @author - Aviral N
- * @version - 1.4
+ * @version - 1.5
  * date     - 18-08-2021
  */
 public class EmpWage {
 
     public static final int IS_PRESENT = 1, IS_PART_TIME_PRESENT = 2;
-    public static final int FULL_TIME_WORKING_HR = 8, PART_TIME_WORKING_HR = 4;
+    public static final int FULL_TIME_WORKING_HR = 8, PART_TIME_WORKING_HR = 4,
+            WORKING_DAY_FOR_MONTH = 20;
 
     /**
      * Purpose - checks whether an EMP is full time present, part-time present or absent
@@ -83,6 +84,26 @@ public class EmpWage {
     }
 
     /**
+     * Purpose - Calculate wage for a month
+     *
+     * @return monthly wage
+     */
+    public int monthlyWage() {
+        EmpWage monthlyWageCalculator = new EmpWage();
+
+        int monthlyWage = 0;
+
+        for (int i = 1; i <= WORKING_DAY_FOR_MONTH; i++) {
+            System.out.println("Day-" + i);
+            int workingHrsPerDay = monthlyWageCalculator.attendanceCheck();
+            int dailyWage = monthlyWageCalculator.dailyWage(workingHrsPerDay);
+
+            monthlyWage += dailyWage;
+        }
+        return monthlyWage;
+    }
+
+    /**
      * Purpose - Execution of all methods
      */
     public static void main(String[] args) {
@@ -90,7 +111,7 @@ public class EmpWage {
 
         EmpWage empWageCalculator = new EmpWage();
 
-        int workingHrPerDay = empWageCalculator.switchCase();
-        empWageCalculator.dailyWage(workingHrPerDay);
+        int monthlyWage = empWageCalculator.monthlyWage();
+        System.out.println("Monthly wage of EMP : " + monthlyWage);
     }
 }
