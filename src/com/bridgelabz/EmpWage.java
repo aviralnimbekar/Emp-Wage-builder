@@ -4,7 +4,7 @@ package com.bridgelabz;
  * Purpose - Employee Wage Computation program for multiple companies
  *
  * @author - Aviral N
- * @version - 1.2
+ * @version - 1.4
  * date     - 18-08-2021
  */
 public class EmpWage {
@@ -54,6 +54,35 @@ public class EmpWage {
     }
 
     /**
+     * Purpose - checks attendance and calculate working per hr using case switch method
+     *
+     * @return workingHrPerDay (8hr, 4hr, 0hr)
+     */
+    public int switchCase() {
+
+        int workingHrPerDay;
+        int rand = (int) (Math.random() * 3);
+
+        switch (rand) {
+
+            case IS_PRESENT:
+                System.out.println("Employee is full time Present");
+                workingHrPerDay = FULL_TIME_WORKING_HR;
+                break;
+
+            case IS_PART_TIME_PRESENT:
+                System.out.println("Employee is part time Present");
+                workingHrPerDay = PART_TIME_WORKING_HR;
+                break;
+
+            default:
+                System.out.println("Employee is absent");
+                workingHrPerDay = 0;
+        }
+        return workingHrPerDay;
+    }
+
+    /**
      * Purpose - Execution of all methods
      */
     public static void main(String[] args) {
@@ -61,7 +90,7 @@ public class EmpWage {
 
         EmpWage empWageCalculator = new EmpWage();
 
-        int workingHrPerDay = empWageCalculator.attendanceCheck();
+        int workingHrPerDay = empWageCalculator.switchCase();
         empWageCalculator.dailyWage(workingHrPerDay);
     }
 }
