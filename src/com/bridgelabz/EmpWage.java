@@ -4,7 +4,7 @@ package com.bridgelabz;
  * Purpose - Employee Wage Computation program for multiple companies
  *
  * @author - Aviral N
- * @version - 1.0
+ * @version - 1.1
  * date     - 18-08-2021
  */
 public class EmpWage {
